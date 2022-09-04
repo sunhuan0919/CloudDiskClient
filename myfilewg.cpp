@@ -1228,7 +1228,7 @@ void MyFileWg::downloadFilesAction()
     QString filename = tmp->fileName;
     DataProgress *dp = tmp->dp;
 
-    //发送get请求
+    //发送get请求       url如下："url": "http://192.168.52.139:80/group1/M00/00/00/wKgfbViy2Z2AJ-FTAaM3As-g3Z0782.mp4",
     QNetworkReply * reply = m_manager->get( QNetworkRequest(url) );
     if(reply == NULL)
     {
@@ -1246,7 +1246,7 @@ void MyFileWg::downloadFilesAction()
         p->dealDownloadTask();//删除下载任务
 
         m_cm.writeRecord(user, filename, "010"); //下载文件成功，记录
-
+        //下载文件成功后在发送一个http请求，处理pv字段
         dealFilePv(md5, filename); //下载文件pv字段处理
     });
 
